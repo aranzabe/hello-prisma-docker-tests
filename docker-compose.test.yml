@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: ejemploPrisma-test-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: ejemploPrisma_test
+    ports:
+      - "5434:5432"  # evita conflicto con dev
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: ejemploPrisma-test-app
+    # command: sh ./test-entrypoint.sh
+    command: sh -c "yarn set version stable && yarn prisma generate && yarn prisma migrate dev && yarn start:dev"
+    environment:
+      DATABASE_URL: postgresql://postgres:test@db:5432/ejemploPrisma_test
+      NODE_ENV: test
+    depends_on:
+      - db
+    volumes:
+      - .:/app       # solo el código, NO montes node_modules, la app no funcionará con esta versión.
+
+volumes:
+  test_db_data:
