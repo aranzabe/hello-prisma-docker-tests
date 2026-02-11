@@ -14,8 +14,8 @@ services:
   app:
     build: .
     container_name: ejemploPrisma-test-app
-    # command: sh ./test-entrypoint.sh
-    command: sh -c "yarn set version stable && yarn prisma generate && yarn prisma migrate dev && yarn start:dev"
+    command: sh ./test-entrypoint.sh
+    # command: sh -c "yarn set version stable && yarn prisma generate && yarn prisma migrate dev && yarn start:dev"
     environment:
       DATABASE_URL: postgresql://postgres:test@db:5432/ejemploPrisma_test
       NODE_ENV: test

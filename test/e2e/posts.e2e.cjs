@@ -11,8 +11,8 @@ async function runPostsTests(BASE_URL) {
     // *** Modificaciones: POST, PATCH, DELETE ***
     await describe(kleur.magenta('Modifications'), async () => {
 
-      // await prisma.post.deleteMany();
-      // await prisma.user.deleteMany();
+      await prisma.post.deleteMany();
+      await prisma.user.deleteMany();
 
 
       //----- POST ----
