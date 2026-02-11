@@ -10,8 +10,11 @@ WORKDIR /app
 # Copiamos package.json y yarn.lock primero
 COPY package.json yarn.lock ./
 
-# Instalamos dependencias con Yarn 4
+# Instalamos la última versión de Yarn. Esto es importante para asegurarnos de que estamos usando Yarn 4, ya que la imagen base podría venir con una versión anterior.
 RUN yarn set version stable
+
+# Instalamos dependencias con Yarn 4
+RUN yarn install
 
 # Copiamos el resto del proyecto
 COPY . .

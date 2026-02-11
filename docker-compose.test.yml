@@ -23,6 +23,7 @@ services:
       - db
     volumes:
       - .:/app       # solo el código, NO montes node_modules, la app no funcionará con esta versión.
+      - /app/node_modules
 
 volumes:
   test_db_data:
